@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- PAGE TITLE HERE -->
+	<title>Admin</title>
+
+	<link href="../public/dashboard/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link rel="stylesheet" href="../public/dashboard/vendor/nouislider/nouislider.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+
+	<!-- Style css -->
+	<link href="../public/dashboard/css/style.css" rel="stylesheet">
+	<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+	<!-- include only the Firebase features as you need -->
+	<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+
+
+</head>
+
+<body class="bg-white">
+
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="waviy">
+			<span style="--i:1; font-weight: 600;">M</span>
+			<span style="--i:2; font-weight: 600;">E</span>
+			<span style="--i:3; font-weight: 600;">M</span>
+			<span style="--i:4; font-weight: 600;">B</span>
+			<span style="--i:5; font-weight: 600;">E</span>
+			<span style="--i:6; font-weight: 600;">D</span>
+			<span style="--i:7; font-weight: 600;">E</span>
+			<span style="--i:8; font-weight: 600;">D</span>
+			<span style="--i:9; font-weight: 600;">.</span>
+			<span style="--i:10; font-weight: 600;">.</span>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header bg-white">
+			<a href="index.html" class="brand-logo">
+				<img src="assets/images/logo.png" alt="" style="height: 2.6rem;">
+
+				<p class="brand-title" width="124px" height="33px" style="font-size: 30px;">Admin</p>
+			</a>
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header bg-white">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left">
+							<div class="dashboard_bar">
+								Dashboard
+							</div>
+						</div>
+						<ul class="navbar-nav header-right">
+
+
+							<li class="nav-item">
+								<a href="javascript:void(0);" class="btn btn-primary d-sm-inline-block d-none">
+									Report's Page<i class="las la-signal ms-3 scale5"></i></a>
+
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="dlabnav bg-white">
+			<div class="dlabnav-scroll">
+				<ul class="metismenu" id="menu">
+					<li class="dropdown header-profile">
+						<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+							<img src="../public/dashboard/images/ion/man (1).png" width="20" alt="" />
+							<div class="header-info ms-3 w-25">
+								<span class="font-w600 ">Hi,<b id="userMail">User</b></span>
+								<!-- <small class=" " >xyz@gmail.com</small> -->
+							</div>
+						</a>
+
+					</li>
+					<li class="bg-primary "><a href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-025-dashboard text-white"></i>
+							<span class="nav-text text-white">Dashboard</span>
+						</a>
+					</li>
+					<li><a href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-050-info"></i>
+							<span class="nav-text">User Account</span>
+						</a>
+					</li>
+					<li><a href="#" aria-expanded="false" id="logoutUser">
+							<i class="flaticon-041-graph"></i>
+							<span class="nav-text">Logout</span>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<!-- row -->
+
+			<div class="container-fluid bg-white ">
+
+
+				<div class="row">
+
+					<div class="col-xl-9 col-xxl-12">
+						<div class="card bg-white">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-xl-6 col-sm-12">
+										<div class="card-bx bg-blue">
+											<img class="pattern-img"
+												src="../public/dashboard/images/pattern/pattern6.png" alt="">
+											<div class="card-info text-white">
+												<img src="../public/dashboard/images/pattern/circle.png" class="mb-4"
+													alt="">
+												<h2 class="text-white card-balance">Total Ratings</h2>
+												<p class="fs-16">All Data</p>
+											</div>
+											<a class="change-btn" href="javascript:void(0);"><i
+													class="fa fa-caret-up up-ico"></i>Reload<span class="reload-icon"><i
+														class="fas fa-sync-alt reload active"></i></span></a>
+										</div>
+									</div>
+									<div class="col-xl-6">
+										<div class="row  mt-xl-0 mt-4">
+											<div class="col-md-6">
+												<h4 class="card-title">Data Insight</h4>
+												<span>Get all your reading's in one place</span>
+												<ul class="card-list mt-4">
+													<li><span class="bg-blue circle"></span>Temperature<span
+															id="tempSpan">0%</span>
+													</li>
+													<li><span class="bg-success circle"></span>BPM<span
+															id="bpmSpan">0%</span>
+													</li>
+													<li><span class="bg-danger circle"></span>Blood
+														Pressure<span id="bpSpan">0%</span>
+													</li>
+													<li><span class="bg-light circle"></span>Step count<span
+															id="stepCountSpan">0%</span>
+													</li>
+												</ul>
+											</div>
+											<div class="col-md-6">
+												<canvas id="polarChart"></canvas>
+											</div>
+										</div>
+									</div>
+									<div class="container card bg-white shadow py-2 "
+										style="position: relative; top: 1rem;">
+
+										<div class="row justify-content-center align-items-center">
+											<!-- Progress Bar 1 -->
+											<div
+												class="col-md-3 col-lg-3 col-xl-3 col-sm-6 col-xs-6 col-6 d-flex flex-column justify-content-center align-items-center">
+												<div class="progress-container">
+													<svg class="progress-svg" width="150" height="150">
+														<circle class="progress-bg" cx="75" cy="75" r="65"
+															stroke-width="10"></circle>
+														<circle class="progress-bar" cx="75" cy="75" r="65"
+															stroke-width="10" stroke-dasharray="0 628">
+														</circle>
+													</svg>
+													<div class="progress-text">0%</div>
+												</div>
+												<div class="mt-3 d-flex flex-column">
+													<label for="progressInput">Temperature</label>
+													<input type="hidden" id="progressInput" min="0" max="100" step="1"
+														value="">
+												</div>
+											</div>
+
+											<!-- Progress Bar 2 -->
+											<div
+												class="col-md-3 col-lg-3 col-xl-3 col-sm-6 col-xs-6 col-6 d-flex flex-column justify-content-center align-items-center">
+												<div class="progress-container">
+													<svg class="progress-svg" width="150" height="150">
+														<circle class="progress-bg" cx="75" cy="75" r="65"
+															stroke-width="10"></circle>
+														<circle class="progress-bar2" cx="75" cy="75" r="65"
+															stroke-width="10" stroke-dasharray="0 628">
+														</circle>
+													</svg>
+													<div class="progress-text2">0%</div>
+												</div>
+												<div class="mt-3 d-flex flex-column">
+													<label for="progressInput2">Blood Pressure</label>
+													<input type="hidden" id="progressInput2" min="0" max="100" step="1"
+														value="">
+												</div>
+											</div>
+
+											<!-- Progress Bar 3 -->
+											<div
+												class="col-md-3 col-lg-3 col-xl-3 col-sm-6 col-xs-6 col-6 d-flex flex-column justify-content-center align-items-center">
+												<div class="progress-container">
+													<svg class="progress-svg" width="150" height="150">
+														<circle class="progress-bg" cx="75" cy="75" r="65"
+															stroke-width="10"></circle>
+														<circle class="progress-bar3" cx="75" cy="75" r="65"
+															stroke-width="10" stroke-dasharray="0 628">
+														</circle>
+													</svg>
+													<div class="progress-text3">0%</div>
+												</div>
+												<div class="mt-3 d-flex flex-column">
+													<label for="progressInput3">BPM</label>
+													<input type="hidden" id="progressInput3" min="0" max="100" step="1"
+														value="">
+												</div>
+											</div>
+
+											<!-- Progress Bar 4 -->
+											<div
+												class="col-md-3 col-lg-3 col-xl-3 col-sm-6 col-xs-6 col-6 d-flex flex-column justify-content-center align-items-center">
+												<div class="progress-container">
+													<svg class="progress-svg" width="150" height="150">
+														<circle class="progress-bg" cx="75" cy="75" r="65"
+															stroke-width="10"></circle>
+														<circle class="progress-bar4" cx="75" cy="75" r="65"
+															stroke-width="10" stroke-dasharray="0 628">
+														</circle>
+													</svg>
+													<div class="progress-text4">0% </div>
+												</div>
+												<div class="mt-3 d-flex flex-column">
+													<label for="progressInput4">Step Count</label>
+													<input type="hidden" id="progressInput4" min="0" max="100" step="1"
+														value="">
+												</div>
+											</div>
+										</div>
+										<div class="row justify-content-center align-items-center mt-4 container py-2">
+											<!-- <h3>Bootstrap Range Sliders</h3> -->
+
+											<!-- Slider 1 -->
+											<div class="form-group col-6">
+												<label for="slider1">Light Intensity</label>
+												<input type="range" class="form-control-range w-100" id="slider1"
+													min="0" max="100" step="1" value="">
+												<span id="sliderValue1">0 (%)</span>
+											</div>
+
+											<!-- Slider 2 -->
+											<div class="form-group col-6">
+												<label for="slider2">Light Intensity</label>
+												<input type="range" class="form-control-range w-100" id="slider2"
+													min="0" max="100" step="1">
+												<span id="sliderValue2">0 (%)</span>
+											</div>
+										</div>
+									</div>
+									<div class="container">
+										<div class="row mb-3">
+											<!-- button 1-->
+											<div class="col-sm mb-3 text-center">
+												<div class="card bg-white p-1">
+													<h5 class="card-header">GPIO 2</h5>
+													<div class="card-body d-flex flex-column gap-2">
+														<h5 class="card-title">
+															Current state: <span id="btn1State"></span>
+														</h5>
+														<button id="btn1On" class="btn btn-lg btn-block btn-success">
+															Switch Off
+														</button>
+														<button id="btn1Off"
+															class="btn btn-lg btn-block btn-outline-primary border-2">
+															Switch On
+														</button>
+													</div>
+												</div>
+											</div>
+											<!-- button 2-->
+											<div class="col-sm mb-3 text-center">
+												<div class="card bg-white p-1">
+													<h5 class="card-header">GPIO 25</h5>
+													<div class="card-body d-flex flex-column gap-2">
+														<h5 class="card-title">
+															Current state: <span id="btn2State"></span>
+														</h5>
+														<button id="btn2On" class="btn btn-lg btn-block btn-success">
+															Switch Off
+														</button>
+														<button id="btn2Off"
+															class="btn btn-lg btn-block btn-outline-primary border-2">
+															Switch On
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+		<!--**********************************
+            Footer start
+        ***********************************-->
+		<div class="footer">
+
+			<div class="copyright">
+				<p>© Designed &amp; by <a href="#" target="_blank">japheth joepari</a> 2023</p>
+			</div>
+		</div>
+		<!--**********************************
+            Footer end
+        ***********************************-->
+
+
+
+
+	</div>
+	<!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+	<!--**********************************
+        Scripts
+    ***********************************-->
+	<!-- Required vendors -->
+	<script src="../public/dashboard/vendor/global/global.min.js"></script>
+	<script src="../public/dashboard/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="../public/dashboard/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+	<!-- Apex Chart -->
+	<script src="../public/dashboard/vendor/apexchart/apexchart.js"></script>
+	<script src="../public/dashboard/vendor/nouislider/nouislider.min.js"></script>
+	<script src="../public/dashboard/vendor/wnumb/wNumb.js"></script>
+
+	<!-- Dashboard 1 -->
+	<script src="../public/dashboard/js/dashboard/dashboard-1.js"></script>
+
+	<script src="../public/dashboard/js/custom.min.js"></script>
+	<script src="../public/dashboard/js/dlabnav-init.js"></script>
+	<script src="../public/dashboard/js/demo.js"></script>
+	<script src="../public/dashboard/js/styleSwitcher.js"></script>
+	<script src="../public/scripts/dashboard.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
+</body>
+
+</html>

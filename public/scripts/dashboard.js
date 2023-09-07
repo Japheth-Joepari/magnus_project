@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   slider1.addEventListener("input", () => {
     const value = slider1.value;
-    sliderValue1.textContent = value;
+    sliderValue1.textContent = value + "%";
   });
 
   // Slider 2
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   slider2.addEventListener("input", () => {
     const value = slider2.value;
-    sliderValue2.textContent = value;
+    sliderValue2.textContent = value + "%";
   });
 
   var firebaseConfig = {
@@ -185,6 +185,9 @@ document.addEventListener("DOMContentLoaded", () => {
       var dbPathBmeTemp = "UsersData/" + uid.toString() + "/sensor/temperature";
       var dbPathBmeHum = "UsersData/" + uid.toString() + "/sensor/humidity";
       var dbPathBmePres = "UsersData/" + uid.toString() + "/sensor/pressure";
+      var dbPathBloodPressure = "UsersData/" + uid.toString() + "/sensor/bp";
+      var dbPathStepCount = "UsersData/" + uid.toString() + "/sensor/steps";
+      var dbPathBeatAvg = "UsersData/" + uid.toString() + "/sensor/beatAvg";
       //   var dbPathInput1 = "UsersData/" + uid.toString() + "/outputs/message";
 
       //////// Button 1 - GPIO 2 ////////
@@ -253,6 +256,91 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         temperatureText.textContent = `${normalizedProgress}ºC`;
         temperature.textContent = `${normalizedProgress}ºC`;
+      });
+
+      // Sensor Readings - Bloog Pressure - Update web page with new values from database
+      var dbBmebp = firebase.database().ref().child(dbPathBloodPressure);
+      dbBmebp.on("value", (snap) => {
+        // Celsius degrees
+        const newBpValue = snap.val().toFixed(2);
+        console.log();
+        const normalizedProgress = Math.max(
+          0,
+          Math.min(100, parseInt(newBpValue))
+        );
+        const circumference = 2 * Math.PI * 65; // Circumference of the circle
+        const strokeDashArray = (circumference * normalizedProgress) / 100;
+
+        bpBar.setAttribute(
+          "stroke-dasharray",
+          `${strokeDashArray} ${circumference}`
+        );
+        bpText.textContent = `${normalizedProgress}mmgh`;
+        bpSpan.textContent = `${normalizedProgress}mmgh`;
+      });
+
+      // Sensor Readings - Step  Count - Update web page with new values from database
+      var dbBmestep = firebase.database().ref().child(dbPathStepCount);
+      dbBmestep.on("value", (snap) => {
+        // Celsius degrees
+        const newStepValue = snap.val().toFixed(2);
+        console.log();
+        const normalizedProgress = Math.max(
+          0,
+          Math.min(100, parseInt(newStepValue))
+        );
+        const circumference = 2 * Math.PI * 65; // Circumference of the circle
+        const strokeDashArray = (circumference * normalizedProgress) / 100;
+
+        stepBar.setAttribute(
+          "stroke-dasharray",
+          `${strokeDashArray} ${circumference}`
+        );
+        stepText.textContent = `${normalizedProgress}steps`;
+        stepCountSpan.textContent = `${normalizedProgress}steps`;
+      });
+
+      // Sensor Readings - Step  Count - Update web page with new values from database
+
+      var dbBmebpm = firebase.database().ref().child(dbPathBeatAvg);
+      dbBmebpm.on("value", (snap) => {
+        // Celsius degrees
+        const newBpmValue = snap.val().toFixed(2);
+        console.log();
+        const normalizedProgress = Math.max(
+          0,
+          Math.min(100, parseInt(newBpmValue))
+        );
+        const circumference = 2 * Math.PI * 65; // Circumference of the circle
+        const strokeDashArray = (circumference * normalizedProgress) / 100;
+
+        bmpBar.setAttribute(
+          "stroke-dasharray",
+          `${strokeDashArray} ${circumference}`
+        );
+        bmpText.textContent = `${normalizedProgress}BPM`;
+        bpmSpan.textContent = `${normalizedProgress}BPM`;
+      });
+
+      // Sensor Readings - Step  Count - Update web page with new values from database
+      var dbBmestep = firebase.database().ref().child(dbPathStepCount);
+      dbBmestep.on("value", (snap) => {
+        // Celsius degrees
+        const newStepValue = snap.val().toFixed(2);
+        console.log();
+        const normalizedProgress = Math.max(
+          0,
+          Math.min(100, parseInt(newStepValue))
+        );
+        const circumference = 2 * Math.PI * 65; // Circumference of the circle
+        const strokeDashArray = (circumference * normalizedProgress) / 100;
+
+        stepBar.setAttribute(
+          "stroke-dasharray",
+          `${strokeDashArray} ${circumference}`
+        );
+        stepText.textContent = `${normalizedProgress}steps`;
+        stepCountSpan.textContent = `${normalizedProgress}steps`;
       });
 
       //   sliders

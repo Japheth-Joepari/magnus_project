@@ -200,6 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
       var dbPathBloodPressure = "UsersData/" + uid.toString() + "/sensor/bp";
       var dbPathStepCount = "UsersData/" + uid.toString() + "/sensor/steps";
       var dbPathBeatAvg = "UsersData/" + uid.toString() + "/sensor/beatAvg";
+      var dbPathInput1 = "UsersData/" + uid.toString() + "/outputs/message";
+
       //   var dbPathInput1 = "UsersData/" + uid.toString() + "/outputs/message";
 
       //////// Button 1 - GPIO 2 ////////
@@ -394,6 +396,18 @@ document.addEventListener("DOMContentLoaded", () => {
           .ref()
           .child(dbPathSlider1)
           .set(Number(slider2.value));
+      };
+
+      var dbInput1 = firebase.database().ref().child(dbPathInput1);
+      const input1 = document.getElementById("input1");
+      const input1Text = document.getElementById("input1Text");
+      // Input 1 - Update input text on web page
+      dbInput1.on("value", (snap) => {
+        input1Text.innerText = snap.val();
+      });
+      // Input 1 - Update database input 1 value
+      input1.onchange = () => {
+        firebase.database().ref().child(dbPathInput1).set(input1.value);
       };
     } else {
       // User is not signed in, redirect to login page

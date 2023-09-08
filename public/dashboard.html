@@ -8,7 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- PAGE TITLE HERE -->
 	<title>Admin</title>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="assets/dashboard/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/dashboard/vendor/nouislider/nouislider.min.css">
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
@@ -301,6 +303,7 @@
 											</div>
 										</div>
 									</div>
+
 									<div class="container">
 										<div class="row mb-3">
 											<!-- button 1-->
@@ -311,11 +314,14 @@
 														<h5 class="card-title">
 															Current state: <span id="btn1State"></span>
 														</h5>
-														<button id="btn1On" class="btn btn-lg btn-block btn-success">
+														<button disabled id="btn1On"
+															class="btn btn-lg btn-block btn-danger">
+															<i class="fas fa-power-off turn-off-icon"></i>
 															Switch Off
 														</button>
-														<button id="btn1Off"
-															class="btn btn-lg btn-block btn-outline-primary border-2">
+														<button disabled id="btn1Off"
+															class="btn btn-lg btn-block btn-primary border-2">
+															<i class="fa fa-lightbulb"></i>
 															Switch On
 														</button>
 													</div>
@@ -329,11 +335,14 @@
 														<h5 class="card-title">
 															Current state: <span id="btn2State"></span>
 														</h5>
-														<button id="btn2On" class="btn btn-lg btn-block btn-success">
+														<button disabled id="btn2On"
+															class="btn btn-lg btn-block btn-danger">
+															<i class="fas fa-power-off turn-off-icon"></i>
 															Switch Off
 														</button>
-														<button id="btn2Off"
-															class="btn btn-lg btn-block btn-outline-primary border-2">
+														<button disabled id="btn2Off"
+															class="btn btn-lg btn-block btn-primary border-2">
+															<i class="fa fa-lightbulb"></i>
 															Switch On
 														</button>
 													</div>
@@ -374,6 +383,39 @@
 
 
 	</div>
+	<script>
+		// Function to create a temperature chart
+		function createTemperatureChart() {
+			return Highcharts.chart('temperature-chart', {
+				chart: {
+					type: 'line',
+				},
+				title: {
+					text: 'Temperature Readings',
+				},
+				xAxis: {
+					type: 'datetime',
+					title: {
+						text: 'Timestamp',
+					},
+				},
+				yAxis: {
+					title: {
+						text: 'Temperature (°C)',
+					},
+				},
+				series: [{
+					name: 'Temperature',
+					data: [], // Initial data points, you can leave it empty
+				}, ],
+			});
+		}
+
+		// Function to update the temperature chart with new data
+		function updateTemperatureChart(chart, timestamp, temperature) {
+			chart.series[0].addPoint([timestamp, temperature], true, true, true);
+		}
+	</script>
 	<!--**********************************
         Main wrapper end
     ***********************************-->
@@ -399,6 +441,8 @@
 	<script src="assets/dashboard/js/demo.js"></script>
 	<script src="assets/dashboard/js/styleSwitcher.js"></script>
 	<script src="scripts/dashboard.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+
 	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
 </body>

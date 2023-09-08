@@ -59057,7 +59057,7 @@ html[dir="rtl"]
 }
 
 .progress-container .progress-bar4 {
-  stroke: rgb(195, 221, 0);
+  stroke: #510bc4;
   fill: none;
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s ease-in-out;
@@ -59069,5 +59069,27 @@ html[dir="rtl"]
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 24px;
-  color: rgb(195, 221, 0);
+  color: #510bc4;
 }
+
+.shining-bulb {
+            color: yellow; /* Bulb color */
+            font-size: 48px; /* Bulb size */
+            animation: shine 2s infinite; /* Shining animation */
+        }
+
+        /* Define the shine animation */
+        @keyframes shine {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+        }

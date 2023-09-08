@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logoutUser");
+  const reloadBtn = document.querySelector(".change-btn");
+  reloadBtn.addEventListener("click", function () {
+    window.location.reload();
+  });
 
   logoutButton.addEventListener("click", () => {
     console.log("clicked");
@@ -134,6 +138,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider1 = document.getElementById("slider1");
   const sliderValue1 = document.getElementById("sliderValue1");
 
+  // Set initial values to 0 or empty
+  slider1.value = 0;
+  sliderValue1.textContent = "0%";
+
   slider1.addEventListener("input", () => {
     const value = slider1.value;
     sliderValue1.textContent = value + "%";
@@ -142,6 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Slider 2
   const slider2 = document.getElementById("slider2");
   const sliderValue2 = document.getElementById("sliderValue2");
+
+  // Set initial values to 0 or empty
+  slider2.value = 0;
+  sliderValue2.textContent = "0%";
 
   slider2.addEventListener("input", () => {
     const value = slider2.value;
@@ -193,19 +205,23 @@ document.addEventListener("DOMContentLoaded", () => {
       //////// Button 1 - GPIO 2 ////////
       var btn1State = document.getElementById("btn1State");
       var dbBtn1 = firebase.database().ref().child(dbPathBtn1);
+      var btn2State = document.getElementById("btn2State");
+      // Button 1 - GPIO 2 - Update database upon button click
+      const btn1On = document.getElementById("btn1On");
+      const btn1Off = document.getElementById("btn1Off");
 
       // Button 1 - GPIO 2 - Update state message on web page
       dbBtn1.on("value", (snap) => {
         if (snap.val() == 1) {
-          btn1State.innerText = "OFF";
+          btn1State.innerHTML = "OFF";
+          btn1On.disabled = true;
+          btn1Off.disabled = false;
         } else {
-          btn1State.innerText = "ON";
+          btn1On.disabled = false;
+          btn1Off.disabled = true;
+          btn1State.innerHTML = " on";
         }
       });
-
-      // Button 1 - GPIO 2 - Update database upon button click
-      const btn1On = document.getElementById("btn1On");
-      const btn1Off = document.getElementById("btn1Off");
 
       btn1On.onclick = () => {
         firebase.database().ref().child(dbPathBtn1).set(1);
@@ -215,15 +231,18 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       ////////  Button 2 - GPIO 12 ////////
-      var btn2State = document.getElementById("btn2State");
       var dbBtn2 = firebase.database().ref().child(dbPathBtn2);
 
       // Button 2 - GPIO 12 - Update state message on web page
       dbBtn2.on("value", (snap) => {
         if (snap.val() == 1) {
-          btn2State.innerText = "OFF";
+          btn2State.innerHTML = "OFF";
+          btn2On.disabled = true;
+          btn2Off.disabled = false;
         } else {
-          btn2State.innerText = "On";
+          btn2On.disabled = false;
+          btn2Off.disabled = true;
+          btn2State.innerHTML = " on";
         }
       });
 
@@ -318,8 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
           "stroke-dasharray",
           `${strokeDashArray} ${circumference}`
         );
-        bmpText.textContent = `${normalizedProgress}BPM`;
-        bpmSpan.textContent = `${normalizedProgress}BPM`;
+        bmpText.textContent = `${normalizedProgress}bpm`;
+        bpmSpan.textContent = `${normalizedProgress}bpm`;
       });
 
       // Sensor Readings - Step  Count - Update web page with new values from database
